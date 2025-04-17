@@ -1,0 +1,182 @@
+import React, { useState, useContext } from "react";
+import axios from "axios";
+import { Navigate } from "react-router-dom";
+import { UserContext } from "../Context/user";
+
+const Profile = () => {
+  const { setUser, user } = useContext(UserContext);
+  const [redirect, setRedirect] = useState(false);
+
+  // Quiz-related calculations
+  let aquiz = user?.quiz?.[0] || 0;
+  const tquiz = 200;
+  let quizl = (300 / 200) * aquiz;
+  let quizacc = aquiz === 0 ? 0 : Math.floor((user.quiz?.[1] / aquiz) * 100);
+
+  const logout = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.get("/logout");
+      setUser(null);
+      setRedirect(true);
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
+  if (redirect) {
+    return <Navigate to="/login" />;
+  }
+
+  // Backend user profilePicture (Google or custom), with fallback
+  const profilePhoto = user?.profilePicture
+    ? user.profilePicture
+    : "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1742569891~exp=1742573491~hmac=2d32e685aa41f94a30ce0fb185a166be825e572d809fc82dce7e6626de4a0e88&w=740";
+
+  return (
+    <div className="min-h-[88vh] w-full bg-gray-100 py-8 px-6">
+      {/* Hero Section with Profile Info */}
+      <div className="max-w-6xl mx-auto mb-8 bg-white rounded-xl shadow-md overflow-hidden">
+        <div className="p-8 flex flex-col md:flex-row items-center gap-8">
+          {/* Profile Photo with Ring Effect */}
+          <div className="relative">
+            <div className="h-40 w-40 md:h-48 md:w-48 rounded-full border-4 border-gray-300 p-1 overflow-hidden">
+              <img
+                src={profilePhoto}
+                alt="Profile"
+                className="h-full w-full object-cover rounded-full"
+              />
+            </div>
+          </div>
+
+          {/* User Info and Actions */}
+          <div className="flex-1 text-center md:text-left">
+            <h1 className="text-4xl md:text-5xl font-bold capitalize mb-2">
+              {user?.username}
+            </h1>
+            <p className="text-gray-600 text-lg mb-6">
+              What a great day to learn sign language!
+            </p>
+            
+            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+              <button
+                className="px-6 py-2 border-2 border-black rounded-md transition-all hover:bg-red-500 hover:text-white hover:border-red-500"
+                onClick={logout}
+              >
+                Logout
+              </button>
+              <button className="px-6 py-2 bg-sec border-2 border-black rounded-md transition-all hover:bg-black hover:text-white" onc>
+                Edit Profile
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Statistics Dashboard */}
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-2xl font-bold mb-6">Your Learning Progress</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Quiz Stats Card */}
+          <div className="bg-white rounded-xl shadow-md p-6 transition-transform hover:translate-y-1">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-2xl font-semibold">Quiz Progress</h3>
+              <div className="text-lg font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full">
+                {quizacc}%
+              </div>
+            </div>
+            
+            <div className="mb-6">
+              <div className="flex justify-between mb-2">
+                <span className="text-gray-600">Total Attempted</span>
+                <span className="font-medium">
+                  {aquiz}/{tquiz}
+                </span>
+              </div>
+              <div className="h-3 rounded-full bg-gray-200 overflow-hidden">
+                <div
+                  className="h-3 bg-green-700 rounded-full transition-all duration-1000"
+                  style={{ width: `${(aquiz/tquiz) * 100}%` }}
+                ></div>
+              </div>
+            </div>
+
+            <button className="w-full py-3 bg-gray-100 text-gray-800 rounded-lg font-medium hover:bg-gray-200 transition-colors">
+              View Quiz History
+            </button>
+          </div>
+
+          {/* Videos Card */}
+          <div className="bg-white rounded-xl shadow-md p-6 transition-transform hover:translate-y-1">
+            <h3 className="text-2xl font-semibold mb-4">Learning Videos</h3>
+            <p className="text-gray-600 mb-6">
+              Continue your learning journey with our educational video content and interactive tutorials.
+            </p>
+            
+            {/* Recent Videos Preview */}
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="bg-gray-100 rounded-lg p-4 aspect-video flex items-center justify-center">
+                <span className="text-gray-500">Basic Signs</span>
+              </div>
+              <div className="bg-gray-100 rounded-lg p-4 aspect-video flex items-center justify-center">
+                <span className="text-gray-500">Advanced Practice</span>
+              </div>
+            </div>
+
+            <button className="w-full py-3 bg-gray-100 text-gray-800 rounded-lg font-medium hover:bg-gray-200 transition-colors">
+              Browse All Videos
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Quick Actions Section */}
+      <div className="max-w-6xl mx-auto mt-8">
+        <h2 className="text-2xl font-bold mb-6">Quick Actions</h2>
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <button className="bg-white rounded-xl shadow-sm p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+            <div className="h-12 w-12 bg-gray-100 rounded-full mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+            </div>
+            <span>Take Quiz</span>
+          </button>
+          
+          <button className="bg-white rounded-xl shadow-sm p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+            <div className="h-12 w-12 bg-gray-100 rounded-full mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <span>Practice</span>
+          </button>
+          
+          <button className="bg-white rounded-xl shadow-sm p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+            <div className="h-12 w-12 bg-gray-100 rounded-full mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <span>Leaderboard</span>
+          </button>
+          
+          <button className="bg-white rounded-xl shadow-sm p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+            <div className="h-12 w-12 bg-gray-100 rounded-full mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <span>Settings</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Profile;

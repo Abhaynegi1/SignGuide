@@ -1,0 +1,180 @@
+{
+    "quizzes": [
+      {
+        "title": "1. Basic Alphabets A–E",
+        "questions": 5,
+        "difficulty": "Super Easy",
+        "quiz": [
+          {
+            "question": "What alphabet does it represent ?",
+            "img":"https://cdn.britannica.com/06/249606-131-19958765/letter-S-American-Sign-Language-ASL.jpg",
+            "options": ["b", "a", "c", "e"],
+            "ans": 0
+          },
+          {
+            "question": "What alphabet does it represent ?",
+            "img":"https://cdn.britannica.com/13/249613-131-EFAB898B/letter-Z-American-Sign-Language-ASL.jpg",
+            "options": ["p", "m", "z", "t"],
+            "ans": 2
+          },
+          {
+            "question": "What alphabet does it represent ?",
+            "img":"https://cdn.britannica.com/93/249593-131-39768592/letter-F-American-Sign-Language-ASL.jpg",
+            "options": ["m", "f", "w", "b"],
+            "ans": 1
+          }
+          ,
+          {
+            "question": "What alphabet does it represent ?",
+            "img":"https://cdn.britannica.com/10/249610-131-136B9C48/letter-W-American-Sign-Language-ASL.jpg",
+            "options": ["m", "n", "w", "r"],
+            "ans": 1
+          }
+          ,
+          {
+            "question": "What alphabet does it represent ?",
+            "img":"https://cdn.britannica.com/91/249591-131-38A9FBAF/letter-D-American-Sign-Language-ASL.jpg",
+            "options": ["i", "k", "d", "b"],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "title": "2. Basic Alphabets F–J",
+        "questions": 5,
+        "difficulty": "Super Easy",
+        "quiz": [
+          {
+            "question": "What is the capital of France?",
+            "options": ["Berlin", "Madrid", "Paris", "Rome"],
+            "ans": 2
+          },
+          {
+            "question": "What is the square root of 144?",
+            "options": ["10", "11", "12", "13"],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "title": "3. Basic Alphabets K-O",
+        "questions": 5,
+        "difficulty": "Super Easy",
+        "quiz": [
+          {
+            "question": "What is the capital of France?",
+            "options": ["Berlin", "Madrid", "Paris", "Rome"],
+            "ans": 2
+          },
+          {
+            "question": "What is the square root of 144?",
+            "options": ["10", "11", "12", "13"],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "title": "4. Basic Alphabets P–Z",
+        "questions": 5,
+        "difficulty": "Super Easy",
+        "quiz": [
+          {
+            "question": "What is the capital of France?",
+            "options": ["Berlin", "Madrid", "Paris", "Rome"],
+            "ans": 2
+          },
+          {
+            "question": "What is the square root of 144?",
+            "options": ["10", "11", "12", "13"],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "title": "5. 3 Letter Word Signs",
+        "questions": 7,
+        "difficulty": "Easy",
+        "quiz": [
+          {
+            "question": "What is the capital of France?",
+            "options": ["Berlin", "Madrid", "Paris", "Rome"],
+            "ans": 2
+          },
+          {
+            "question": "What is the square root of 144?",
+            "options": ["10", "11", "12", "13"],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "title": "6. Everyday Objects",
+        "questions": 7,
+        "difficulty": "Medium",
+        "quiz": [
+          {
+            "question": "What is the capital of France?",
+            "options": ["Berlin", "Madrid", "Paris", "Rome"],
+            "ans": 2
+          },
+          {
+            "question": "What is the square root of 144?",
+            "options": ["10", "11", "12", "13"],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "title": "7. Short Sentences ",
+        "questions": 10,
+        "difficulty": "Hard",
+        "quiz": [
+          {
+            "question": "Who developed the theory of relativity?",
+            "options": ["Newton", "Einstein", "Tesla", "Hawking"],
+            "ans": 1
+          },
+          {
+            "question": "What is the chemical symbol for Gold?",
+            "options": ["Au", "Ag", "Pb", "Fe"],
+            "ans": 0
+          }
+        ]
+      },
+      {
+        "title": "9. Expressions and Emotions ",
+        "questions": 7,
+        "difficulty": "Hard",
+        "quiz": [
+          {
+            "question": "Who developed the theory of relativity?",
+            "options": ["Newton", "Einstein", "Tesla", "Hawking"],
+            "ans": 1
+          },
+          {
+            "question": "What is the chemical symbol for Gold?",
+            "options": ["Au", "Ag", "Pb", "Fe"],
+            "ans": 0
+          }
+        ]
+      },
+      {
+        "title": "10.Final Challenge",
+        "questions": 15,
+        "difficulty": "Hard",
+        "quiz": [
+          {
+            "question": "Who developed the theory of relativity?",
+            "options": ["Newton", "Einstein", "Tesla", "Hawking"],
+            "ans": 1
+          },
+          {
+            "question": "What is the chemical symbol for Gold?",
+            "options": ["Au", "Ag", "Pb", "Fe"],
+            "ans": 0
+          }
+        ]
+      }
+    ]
+  }
+  

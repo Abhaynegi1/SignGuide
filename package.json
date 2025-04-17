@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@tensorflow-models/handpose": "^0.1.0",
+    "@tensorflow/tfjs": "^4.22.0",
+    "@tensorflow/tfjs-backend-webgl": "^4.22.0",
+    "axios": "^1.7.9",
+    "react-dropzone": "^14.3.8",
+    "react-router-dom": "^7.2.0",
+    "tesseract.js": "^6.0.0"
+  }
+}
