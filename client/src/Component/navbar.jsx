@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { MdOutlineHandshake } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { UserContext } from '../Context/user';
@@ -11,12 +11,11 @@ const Nav = () => {
   ];
 
   const { user } = useContext(UserContext);
+  const [imageError, setImageError] = useState(false);
   const defaultProfileImage = "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1742569891~exp=1742573491~hmac=2d32e685aa41f94a30ce0fb185a166be825e572d809fc82dce7e6626de4a0e88&w=740";
 
-  // Use backend profile picture if available, else fallback
-  const profileImage = user?.profilePicture?.trim() 
-    ? user.profilePicture 
-    : defaultProfileImage;
+  // Use profile picture with error handling, similar to Profile component
+  const profileImage = !imageError && user?.profilePicture ? user.profilePicture : defaultProfileImage;
 
   return (
     <div className='h-[12vh] bg-white sticky top-0 right-0 z-50 w-[98vw] flex items-center justify-between px-10 bg-opacity-90 backdrop-blur-md'>
@@ -54,6 +53,12 @@ const Nav = () => {
               src={profileImage} 
               alt="Profile" 
               className="w-full h-full object-cover"
+              crossOrigin="anonymous"
+              referrerPolicy="no-referrer"
+              onError={(e) => {
+                console.log("Nav image failed to load:", profileImage);
+                setImageError(true);
+              }}
             />
           </div>
         </Link>

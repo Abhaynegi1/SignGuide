@@ -14,6 +14,7 @@ import QuizPage from './Pages/quizpage.jsx'
 import ImgUpload from './Pages/imgUpload.jsx'
 import LiveDetect from './Pages/LiveDetect.jsx'
 import Learn from './Pages/learn.jsx'
+import EditProfile from './Pages/editProfile.jsx'
 
 
 
@@ -27,13 +28,14 @@ const App = () => {
       <Landing/>
       </>
     },
-    {
+   {
       path: '/learn',  // Add the '/learn' route
       element: <>
         <Nav />
         <Learn />  
       </>
-    },{
+    },
+    {
        path:'/videos',
       element:<>
         <Nav/>
@@ -60,6 +62,13 @@ const App = () => {
       path:'/profile',
       element:<>
        <Nav/><Profile/>
+      </>
+    },
+    {
+      path: '/EditProfile',  
+      element: <>
+        <Nav />
+        <EditProfile />  
       </>
     },
     {

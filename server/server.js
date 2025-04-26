@@ -9,6 +9,9 @@ const jwt = require("jsonwebtoken")
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const session = require('express-session')
+const multer = require('multer')
+const path = require('path')
+const fs = require('fs')
 
 mongoose.connect('mongodb://localhost:27017/collegePro')
 
@@ -16,6 +19,38 @@ const jwtsec = 'lskjf24yi2o3u429034u90irjjss'
 
 const GOOGLE_CLIENT_ID = '841232493295-6c4849ib19vnv5o2htof9g9b6u6mailt.apps.googleusercontent.com'
 const GOOGLE_CLIENT_SECRET = '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'
+
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const uploadsDir = path.join(__dirname, 'uploads');
+    // Create directory if it doesn't exist
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true });
+    }
+    cb(null, uploadsDir);
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const ext = path.extname(file.originalname);
+    cb(null, 'profile-' + uniqueSuffix + ext);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  // Accept only image files
+  if (file.mimetype.startsWith('image/')) {
+    cb(null, true);
+  } else {
+    cb(new Error('Only image files are allowed!'), false);
+  }
+};
+
+const upload = multer({ 
+  storage, 
+  fileFilter,
+  limits: { fileSize: 5 * 1024 * 1024 } // 5MB max size
+});
 
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
@@ -65,6 +100,7 @@ passport.deserializeUser(async (id, done) => {
     }
 })
 
+// CORS configuration
 app.use(cors({
     credentials: true,
     origin: 'http://localhost:5173'
@@ -82,6 +118,10 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
+
+// Serve uploaded files statically
+// This is crucial for accessing uploaded profile images
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.get('/auth/google',
     passport.authenticate('google', { scope: ['profile', 'email'] })
@@ -168,6 +208,12 @@ app.get('/profile', async (req, res) => {
             const userData = await User.findById(decodedToken.id)
             if (!userData) return res.status(404).json({ message: 'User not found' })
 
+            // Format the profile picture URL to ensure it's accessible
+            if (userData.profilePicture && !userData.profilePicture.startsWith('http')) {
+                // Make sure we're returning a full URL for local images
+                userData._doc.profilePicture = `http://localhost:3000${userData.profilePicture}`;
+            }
+
             res.status(200).json(userData)
         })
     } catch (error) {
@@ -175,6 +221,89 @@ app.get('/profile', async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' })
     }
 })
+
+// Add profile update route
+app.put('/api/user/profile', upload.single('profileImage'), async (req, res) => {
+    try {
+        const { token } = req.cookies;
+        if (!token) {
+            return res.status(401).json({ error: "Unauthorized: No token provided" });
+        }
+        
+        jwt.verify(token, jwtsec, async (err, decodedToken) => {
+            if (err) {
+                return res.status(401).json({ error: "Unauthorized: Invalid token" });
+            }
+            
+            const { username } = req.body;
+            
+            // Check if username already exists (but not for the current user)
+            const existingUser = await User.findOne({ 
+                username: username, 
+                _id: { $ne: decodedToken.id } 
+            });
+            
+            if (existingUser) {
+                return res.status(400).json({ error: "Username already exists" });
+            }
+            
+            // Find the user to update
+            const user = await User.findById(decodedToken.id);
+            if (!user) {
+                return res.status(404).json({ error: "User not found" });
+            }
+            
+            // Update username
+            user.username = username;
+            
+            // Update profile picture if a new one was uploaded
+            if (req.file) {
+                const profilePicturePath = `/uploads/${req.file.filename}`;
+                user.profilePicture = profilePicturePath;
+            }
+            
+            // Save the updated user
+            await user.save();
+            
+            // Create a new token with updated info
+            const updatedToken = jwt.sign(
+                { id: user._id, username: user.username, profilePicture: user.profilePicture },
+                jwtsec,
+                { expiresIn: '1h' }
+            );
+            
+            // Set the new token in the cookie
+            res.cookie('token', updatedToken, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production'
+            });
+            
+            // Return the updated user data with formatted profile picture URL
+            const userData = {
+                _id: user._id,
+                username: user.username,
+                email: user.email,
+                quiz: user.quiz
+            };
+            
+            // Make sure the profile picture URL is properly formatted
+            if (user.profilePicture) {
+                if (user.profilePicture.startsWith('http')) {
+                    // If it's already a full URL, use it as is
+                    userData.profilePicture = user.profilePicture;
+                } else {
+                    // If it's a local path, prepend the server URL
+                    userData.profilePicture = `http://localhost:3000${user.profilePicture}`;
+                }
+            }
+            
+            return res.status(200).json(userData);
+        });
+    } catch (error) {
+        console.error("Profile update error:", error);
+        return res.status(500).json({ error: "Server error" });
+    }
+});
 
 app.post("/quizsubmit", async (req, res) => {
     try {
