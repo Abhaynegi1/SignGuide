@@ -15,6 +15,7 @@ import ImgUpload from './Pages/imgUpload.jsx'
 import LiveDetect from './Pages/LiveDetect.jsx'
 import Learn from './Pages/learn.jsx'
 import EditProfile from './Pages/editProfile.jsx'
+import ContactUs from './Pages/contactUs.jsx'
 
 
 
@@ -105,6 +106,13 @@ const App = () => {
         <Nav/>
         <LiveDetect/>
       </>
+    },
+    {
+      path: '/contactUs',
+      element: <>
+        <Nav/>
+        <ContactUs/>
+        </>
     }
   ])
   return (

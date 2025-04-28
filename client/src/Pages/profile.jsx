@@ -144,9 +144,11 @@ const Profile = () => {
               </div>
             </div>
 
-            <button className="w-full py-3 bg-gray-100 text-gray-800 rounded-lg font-medium hover:bg-gray-200 transition-colors">
-              Browse All Videos
-            </button>
+            <Link to="/videos">
+                <button className="w-full py-3 bg-gray-100 text-gray-800 rounded-lg font-medium hover:bg-gray-200 transition-colors">
+                  Browse All Videos
+                </button>
+            </Link>
           </div>
         </div>
       </div>

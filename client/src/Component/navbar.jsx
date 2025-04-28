@@ -7,7 +7,7 @@ const Nav = () => {
   const navbar = [
     { main: 'Learn', sub: ['articles', 'videos', 'quiz'] },
     { main: 'Detect', sub: ['liveDetect', 'imgUpload'] }, 
-    { main: 'About Us', sub: ['Bill Gates'] }
+    { main: 'Contacts', sub: ['contactUs'] }
   ];
 
   const { user } = useContext(UserContext);
