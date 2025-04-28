@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as tf from '@tensorflow/tfjs';
 
-
 const SignLanguageTranslator = () => {
   const [activeTab, setActiveTab] = useState('textToSign');
   const [image, setImage] = useState(null);
@@ -302,20 +301,22 @@ const SignLanguageTranslator = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-6 bg-gray-100">
-      <h1 className="text-4xl font-bold mb-8 text-indigo-600">Sign Language Translator</h1>
+    <div className="min-h-screen flex flex-col items-center p-6 bg-teal-50">
+      <h1 className="text-4xl font-bold mb-8 text-teal-800">Sign Language Translator</h1>
       
       {/* Tab Navigation */}
       <div className="flex mb-6 bg-white rounded-lg shadow-md w-full max-w-lg">
         <button 
           onClick={() => setActiveTab('textToSign')}
-          className={`px-6 py-3 w-1/2 ${activeTab === 'textToSign' ? 'bg-indigo-600 text-white' : 'bg-white text-gray-700'} rounded-l-lg font-medium transition-colors`}
+          className={`px-6 py-3 w-1/2 ${activeTab === 'textToSign' ? 'bg-teal-500 text-white' : 'bg-white text-teal-700'} rounded-l-lg font-medium transition-colors`}
+          style={activeTab === 'textToSign' ? { backgroundColor: '#53AAA1' } : {}}
         >
           Text to Sign Language
         </button>
         <button 
           onClick={() => setActiveTab('signToText')}
-          className={`px-6 py-3 w-1/2 ${activeTab === 'signToText' ? 'bg-indigo-600 text-white' : 'bg-white text-gray-700'} rounded-r-lg font-medium transition-colors`}
+          className={`px-6 py-3 w-1/2 ${activeTab === 'signToText' ? 'bg-teal-500 text-white' : 'bg-white text-teal-700'} rounded-r-lg font-medium transition-colors`}
+          style={activeTab === 'signToText' ? { backgroundColor: '#53AAA1' } : {}}
         >
           Sign Language to Text
         </button>
@@ -338,11 +339,11 @@ const SignLanguageTranslator = () => {
       {activeTab === 'textToSign' && (
         <div className="w-full max-w-lg bg-white p-6 rounded-lg shadow-md">
           <form onSubmit={handleTextSubmit} className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-teal-800 text-sm font-bold mb-2">
               Enter text to translate:
             </label>
             <textarea
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="w-full px-3 py-2 border border-teal-200 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-300"
               rows="4"
               value={text}
               onChange={(e) => setText(e.target.value)}
@@ -350,7 +351,8 @@ const SignLanguageTranslator = () => {
             />
             <button 
               type="submit" 
-              className="mt-4 bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors"
+              className="mt-4 text-white py-2 px-4 rounded-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-teal-300 transition-colors"
+              style={{ backgroundColor: '#53AAA1' }}
               disabled={isLoading}
             >
               {isLoading ? 'Translating...' : 'Translate'}
@@ -360,8 +362,8 @@ const SignLanguageTranslator = () => {
           {/* Translation Result - Visual Sign Representation with Images */}
           {translatedSigns.length > 0 && (
             <div className="mt-6">
-              <h3 className="text-lg font-medium text-gray-700 mb-2">Sign Language Translation:</h3>
-              <div className="flex flex-wrap gap-3 bg-gray-100 p-4 rounded-md">
+              <h3 className="text-lg font-medium text-teal-800 mb-2">Sign Language Translation:</h3>
+              <div className="flex flex-wrap gap-3 bg-teal-50 p-4 rounded-md">
                 {translatedSigns.map((sign) => (
                   <div key={sign.id} className="flex flex-col items-center p-2">
                     {sign.image ? (
@@ -373,22 +375,22 @@ const SignLanguageTranslator = () => {
                         />
                       </div>
                     ) : (
-                      <div className="w-20 h-20 flex items-center justify-center bg-gray-200 rounded-md shadow-sm">
-                        <span className="text-2xl font-bold">{sign.char}</span>
+                      <div className="w-20 h-20 flex items-center justify-center bg-teal-100 rounded-md shadow-sm">
+                        <span className="text-2xl font-bold text-teal-800">{sign.char}</span>
                       </div>
                     )}
                     <div className="w-24 mt-2">
-                      <span className="text-xs text-gray-500 text-center block">
+                      <span className="text-xs text-teal-700 text-center block">
                         {sign.char === ' ' ? 'Space' : sign.char.toUpperCase()}
                       </span>
-                      <span className="text-xs text-gray-500 text-center block mt-1">
+                      <span className="text-xs text-teal-600 text-center block mt-1">
                         {sign.description}
                       </span>
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="mt-4 text-sm text-gray-600">
+              <div className="mt-4 text-sm text-teal-600">
                 <p className="font-medium">Instructions:</p>
                 <p>To sign this message, form each hand sign in sequence. Space between words is indicated by a brief pause.</p>
               </div>
@@ -401,17 +403,17 @@ const SignLanguageTranslator = () => {
       {activeTab === 'signToText' && (
         <div className="w-full max-w-lg bg-white p-6 rounded-lg shadow-md">
           <div className="mb-6">
-            <h3 className="text-lg font-medium text-gray-700 mb-4">Upload a sign language image:</h3>
+            <h3 className="text-lg font-medium text-teal-800 mb-4">Upload a sign language image:</h3>
             
             <div 
               onClick={triggerFileInput}
-              className="flex flex-col items-center justify-center p-8 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors"
+              className="flex flex-col items-center justify-center p-8 border-2 border-dashed border-teal-200 rounded-lg cursor-pointer hover:bg-teal-50 transition-colors"
             >
-              <svg className="h-12 w-12 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="h-12 w-12 text-teal-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
               </svg>
-              <span className="text-sm text-gray-600 mb-1">Click to upload an image</span>
-              <span className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</span>
+              <span className="text-sm text-teal-700 mb-1">Click to upload an image</span>
+              <span className="text-xs text-teal-500">PNG, JPG, GIF up to 10MB</span>
               <input 
                 type="file" 
                 ref={fileInputRef}
@@ -420,7 +422,7 @@ const SignLanguageTranslator = () => {
                 onChange={handleImageUpload} 
               />
             </div>
-            <p className="mt-3 text-xs text-gray-500 text-center">
+            <p className="mt-3 text-xs text-teal-500 text-center">
               Try different file types (.png, .jpg, .gif) to see different sign recognition results
             </p>
           </div>
@@ -428,8 +430,8 @@ const SignLanguageTranslator = () => {
           {/* Preview and Result */}
           {image && (
             <div className="mt-6">
-              <h3 className="text-lg font-medium text-gray-700 mb-2">Uploaded Image:</h3>
-              <div className="bg-gray-100 p-4 rounded-md flex justify-center">
+              <h3 className="text-lg font-medium text-teal-800 mb-2">Uploaded Image:</h3>
+              <div className="bg-teal-50 p-4 rounded-md flex justify-center">
                 <img src={image} alt="Uploaded sign language" className="max-w-full max-h-64 object-contain rounded-md" />
               </div>
             </div>
@@ -438,26 +440,26 @@ const SignLanguageTranslator = () => {
           {isLoading && (
             <div className="flex justify-center my-6">
               <div className="relative">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
-                <div className="mt-2 text-center text-sm text-gray-500">Processing sign language...</div>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-500"></div>
+                <div className="mt-2 text-center text-sm text-teal-500">Processing sign language...</div>
               </div>
             </div>
           )}
           
           {translatedText && !isLoading && (
             <div className="mt-6">
-              <h3 className="text-lg font-medium text-gray-700 mb-2">Recognized Text:</h3>
-              <div className="bg-gray-100 p-4 rounded-md text-center">
-                <p className="text-2xl font-bold text-indigo-600">{translatedText}</p>
+              <h3 className="text-lg font-medium text-teal-800 mb-2">Recognized Text:</h3>
+              <div className="bg-teal-50 p-4 rounded-md text-center">
+                <p className="text-2xl font-bold" style={{ color: '#53AAA1' }}>{translatedText}</p>
               </div>
-              <div className="mt-4 flex justify-between items-center bg-gray-50 p-3 rounded-md">
-                <div className="text-sm text-gray-700">
+              <div className="mt-4 flex justify-between items-center bg-teal-50 p-3 rounded-md">
+                <div className="text-sm text-teal-700">
                   <span className="font-medium">Recognition confidence:</span>
                 </div>
-                <div className="w-1/2 bg-gray-200 rounded-full h-4">
+                <div className="w-1/2 bg-teal-100 rounded-full h-4">
                   <div 
-                    className="bg-green-500 h-4 rounded-full" 
-                    style={{ width: `${Math.floor(Math.random() * 30) + 65}%` }}
+                    className="h-4 rounded-full" 
+                    style={{ width: `${Math.floor(Math.random() * 30) + 65}%`, backgroundColor: '#53AAA1' }}
                   ></div>
                 </div>
               </div>
@@ -466,15 +468,19 @@ const SignLanguageTranslator = () => {
         </div>
       )}
       
-      <div className="w-full max-w-lg mt-8 bg-indigo-50 p-4 rounded-lg shadow-sm">
-        <h3 className="text-lg font-medium text-indigo-700 mb-2">How to use this translator</h3>
-        <ul className="text-sm text-indigo-900 list-disc pl-5 space-y-1">
+      <div className="w-full max-w-lg mt-8 bg-teal-100 p-4 rounded-lg shadow-sm">
+        <h3 className="text-lg font-medium text-teal-800 mb-2">How to use this translator</h3>
+        <ul className="text-sm text-teal-700 list-disc pl-5 space-y-1">
           <li>For Text to Sign: Type any text and click "Translate" to see the corresponding ASL sign images.</li>
           <li>For Sign to Text: Upload an image of a hand sign or sign language gesture to get a text translation.</li>
           <li>For best results, ensure your hand sign is clear, well-lit, and centered in the image.</li>
           <li>The recognition model works best with single-letter ASL signs against a simple background.</li>
         </ul>
       </div>
+      
+      <footer className="mt-12 text-center text-teal-600 text-sm">
+        <p>© 2025 SignGuide | Helping bridge communication gaps</p>
+      </footer>
     </div>
   );
 };
