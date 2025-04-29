@@ -9,7 +9,9 @@ import Landing from './Pages/landing.jsx'
 import { UserContextProvider } from './Context/user'
 import Profile from './Pages/profile.jsx'
 import Quiz from './Pages/quiz.jsx'
-import Article from './Pages/article.jsx'
+// import Article from './Pages/article.jsx'
+import Article from './Pages/ArticlesList.jsx'
+import ArticleViewer from './Pages/ArticleViewer.jsx'
 import QuizPage from './Pages/quizpage.jsx'
 import ImgUpload from './Pages/imgUpload.jsx'
 import LiveDetect from './Pages/LiveDetect.jsx'
@@ -91,6 +93,13 @@ const App = () => {
       element:<>
       <Nav/>
       <Article/>
+      </>
+    },
+    {
+      path:'/articles/:articleId',
+      element:<>
+      <Nav/>
+      <ArticleViewer/>
       </>
     },
     {

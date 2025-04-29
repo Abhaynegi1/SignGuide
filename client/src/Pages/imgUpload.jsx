@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as tf from '@tensorflow/tfjs';
+import * as Tesseract from 'tesseract.js';
 
 const SignLanguageTranslator = () => {
   const [activeTab, setActiveTab] = useState('textToSign');
   const [image, setImage] = useState(null);
   const [text, setText] = useState('');
-  const [translatedText, setTranslatedText] = useState('');
+  const [extractedText, setExtractedText] = useState('');
   const [translatedSigns, setTranslatedSigns] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [model, setModel] = useState(null);
   const [modelLoaded, setModelLoaded] = useState(false);
   const [modelLoading, setModelLoading] = useState(false);
+  const [recognitionProgress, setRecognitionProgress] = useState(0);
   const fileInputRef = useRef(null);
   
   // Dictionary for ASL letter images
@@ -42,7 +44,7 @@ const SignLanguageTranslator = () => {
     'x': 'https://cdn.britannica.com/11/249611-131-D0108191/letter-X-American-Sign-Language-ASL.jpg',
     'y': 'https://cdn.britannica.com/12/249612-131-B5F72258/letter-Y-American-Sign-Language-ASL.jpg',
     'z': 'https://cdn.britannica.com/13/249613-131-B5F72258/letter-Z-American-Sign-Language-ASL.jpg',
-    ' ': 'https://novalin.se/wp-content/uploads/2020/03/Sveagarden-1010--600x446.jpg', // You can create a blank image for space
+    ' ': 'https://novalin.se/wp-content/uploads/2020/03/Sveagarden-1010--600x446.jpg',
   };
 
   // Dictionary of sign descriptions for each letter
@@ -133,123 +135,44 @@ const SignLanguageTranslator = () => {
     }
   };
 
-  // Preprocess the image for the model
-  const preprocessImage = async (imageBitmap) => {
-    try {
-      // Convert the image to a tensor
-      const tensor = tf.browser.fromPixels(imageBitmap)
-        .resizeNearestNeighbor([224, 224]) // Resize to model input size
-        .toFloat()
-        .div(tf.scalar(255.0))  // Normalize pixel values
-        .expandDims();          // Add batch dimension
-      
-      return tensor;
-    } catch (err) {
-      throw new Error('Error preprocessing image: ' + err.message);
-    }
-  };
-
-  // Function to simulate the sign language recognition with ML
-  const simulateModelPrediction = (imageFile) => {
-    // Extract file extension to determine which sign to simulate
-    const fileExt = imageFile.name.split('.').pop().toLowerCase();
-    
-    // Generate a "prediction" based on file extension (for demo purposes)
-    // In a real app with a working model, we'd use the actual model prediction
-    let predictedIndex;
-    let confidence;
-    
-    if (fileExt === 'png') {
-      predictedIndex = 0; // 'A'
-      confidence = 0.92;
-    } else if (fileExt === 'jpg' || fileExt === 'jpeg') {
-      predictedIndex = 19; // 'T'
-      confidence = 0.88;
-    } else if (fileExt === 'gif') {
-      predictedIndex = 7; // 'H'
-      confidence = 0.95;
-    } else {
-      predictedIndex = 22; // 'W'
-      confidence = 0.82;
-    }
-    
-    return { 
-      className: CLASS_NAMES[predictedIndex], 
-      confidence: confidence * 100 
-    };
-  };
-
-  // Sign language to text translation using TensorFlow model or simulation
-  const translateSignToText = async (file) => {
+  // Use Tesseract.js to extract text from the uploaded image
+  const extractTextFromImage = async (file) => {
     if (!file) {
       setError('No image file selected.');
       return;
     }
     
     setIsLoading(true);
+    setRecognitionProgress(0);
     
     try {
-      // Load model if not already loaded
-      const modelReady = await loadModelIfNeeded();
-      
-      // Create an image element to load the file
-      const img = new Image();
-      img.src = URL.createObjectURL(file);
-      
-      img.onload = async () => {
-        try {
-          let result;
-          let confidence;
-          
-          if (modelReady && model) {
-            try {
-              // Try to use the real model if available
-              const imageBitmap = await createImageBitmap(img);
-              const tensor = await preprocessImage(imageBitmap);
-              const predictions = await model.predict(tensor);
-              
-              // For this demo, we're not using actual model predictions
-              // because the mobilenet model doesn't predict ASL signs
-              // Instead, we'll use our simulation for consistent behavior
-              tensor.dispose();
-              predictions.dispose();
-              
-              const simulatedResult = simulateModelPrediction(file);
-              result = simulatedResult.className;
-              confidence = simulatedResult.confidence;
-            } catch (err) {
-              console.error("Model prediction failed, using simulation instead:", err);
-              const simulatedResult = simulateModelPrediction(file);
-              result = simulatedResult.className;
-              confidence = simulatedResult.confidence;
+      // Use Tesseract.js to extract text from the image
+      const result = await Tesseract.recognize(
+        URL.createObjectURL(file),
+        'eng',
+        { 
+          logger: m => {
+            if (m.status === 'recognizing text') {
+              setRecognitionProgress(m.progress * 100);
             }
-          } else {
-            // Fall back to simulation if model isn't loaded
-            const simulatedResult = simulateModelPrediction(file);
-            result = simulatedResult.className;
-            confidence = simulatedResult.confidence;
           }
-          
-          // Update state with prediction result
-          setTranslatedText(result);
-          
-          // You could store the confidence in state if needed
-          // setConfidence(confidence);
-          
-          setIsLoading(false);
-        } catch (err) {
-          setError('Error during image processing: ' + err.message);
-          setIsLoading(false);
         }
-      };
+      );
       
-      img.onerror = () => {
-        setError('Error loading image. Please try a different file.');
-        setIsLoading(false);
-      };
+      // Extract the text
+      const extractedText = result.data.text.trim();
       
+      if (extractedText) {
+        setExtractedText(extractedText);
+        // Also convert the extracted text to sign language
+        translateTextToSign(extractedText);
+      } else {
+        setError('No text could be extracted from the image. Try a clearer image.');
+      }
+      
+      setIsLoading(false);
     } catch (err) {
-      setError('Error processing sign language image: ' + err.message);
+      setError('Error extracting text from image: ' + err.message);
       setIsLoading(false);
     }
   };
@@ -264,9 +187,11 @@ const SignLanguageTranslator = () => {
         return;
       }
       
+      setExtractedText('');
+      setTranslatedSigns([]);
       const imageUrl = URL.createObjectURL(file);
       setImage(imageUrl);
-      translateSignToText(file);
+      extractTextFromImage(file);
     }
   };
 
@@ -311,14 +236,14 @@ const SignLanguageTranslator = () => {
           className={`px-6 py-3 w-1/2 ${activeTab === 'textToSign' ? 'bg-teal-500 text-white' : 'bg-white text-teal-700'} rounded-l-lg font-medium transition-colors`}
           style={activeTab === 'textToSign' ? { backgroundColor: '#53AAA1' } : {}}
         >
-          Text to Sign Language
+          Text to Sign
         </button>
         <button 
           onClick={() => setActiveTab('signToText')}
           className={`px-6 py-3 w-1/2 ${activeTab === 'signToText' ? 'bg-teal-500 text-white' : 'bg-white text-teal-700'} rounded-r-lg font-medium transition-colors`}
           style={activeTab === 'signToText' ? { backgroundColor: '#53AAA1' } : {}}
         >
-          Sign Language to Text
+          Image to Sign
         </button>
       </div>
       
@@ -399,11 +324,11 @@ const SignLanguageTranslator = () => {
         </div>
       )}
       
-      {/* Sign Language to Text Tab */}
+      {/* Image to Sign Tab */}
       {activeTab === 'signToText' && (
         <div className="w-full max-w-lg bg-white p-6 rounded-lg shadow-md">
           <div className="mb-6">
-            <h3 className="text-lg font-medium text-teal-800 mb-4">Upload a sign language image:</h3>
+            <h3 className="text-lg font-medium text-teal-800 mb-4">Upload an image with text:</h3>
             
             <div 
               onClick={triggerFileInput}
@@ -412,7 +337,7 @@ const SignLanguageTranslator = () => {
               <svg className="h-12 w-12 text-teal-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
               </svg>
-              <span className="text-sm text-teal-700 mb-1">Click to upload an image</span>
+              <span className="text-sm text-teal-700 mb-1">Click to upload an image with text</span>
               <span className="text-xs text-teal-500">PNG, JPG, GIF up to 10MB</span>
               <input 
                 type="file" 
@@ -423,7 +348,7 @@ const SignLanguageTranslator = () => {
               />
             </div>
             <p className="mt-3 text-xs text-teal-500 text-center">
-              Try different file types (.png, .jpg, .gif) to see different sign recognition results
+              The app will extract text from your image and convert it to sign language
             </p>
           </div>
           
@@ -432,37 +357,67 @@ const SignLanguageTranslator = () => {
             <div className="mt-6">
               <h3 className="text-lg font-medium text-teal-800 mb-2">Uploaded Image:</h3>
               <div className="bg-teal-50 p-4 rounded-md flex justify-center">
-                <img src={image} alt="Uploaded sign language" className="max-w-full max-h-64 object-contain rounded-md" />
+                <img src={image} alt="Uploaded image with text" className="max-w-full max-h-64 object-contain rounded-md" />
               </div>
             </div>
           )}
           
           {isLoading && (
-            <div className="flex justify-center my-6">
-              <div className="relative">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-500"></div>
-                <div className="mt-2 text-center text-sm text-teal-500">Processing sign language...</div>
+            <div className="flex flex-col items-center my-6">
+              <div className="relative w-full max-w-md">
+                <div className="h-2 w-full bg-teal-100 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-teal-500 transition-all duration-300" 
+                    style={{ width: `${recognitionProgress}%` }}
+                  ></div>
+                </div>
+                <div className="mt-2 text-center text-sm text-teal-500">
+                  Extracting text from image... {Math.round(recognitionProgress)}%
+                </div>
               </div>
             </div>
           )}
           
-          {translatedText && !isLoading && (
+          {extractedText && !isLoading && (
             <div className="mt-6">
-              <h3 className="text-lg font-medium text-teal-800 mb-2">Recognized Text:</h3>
-              <div className="bg-teal-50 p-4 rounded-md text-center">
-                <p className="text-2xl font-bold" style={{ color: '#53AAA1' }}>{translatedText}</p>
+              <h3 className="text-lg font-medium text-teal-800 mb-2">Extracted Text:</h3>
+              <div className="bg-teal-50 p-4 rounded-md">
+                <p className="text-teal-800">{extractedText}</p>
               </div>
-              <div className="mt-4 flex justify-between items-center bg-teal-50 p-3 rounded-md">
-                <div className="text-sm text-teal-700">
-                  <span className="font-medium">Recognition confidence:</span>
+              
+              {/* Show the sign language translation of the extracted text */}
+              {translatedSigns.length > 0 && (
+                <div className="mt-6">
+                  <h3 className="text-lg font-medium text-teal-800 mb-2">Sign Language Translation:</h3>
+                  <div className="flex flex-wrap gap-3 bg-teal-50 p-4 rounded-md">
+                    {translatedSigns.map((sign) => (
+                      <div key={sign.id} className="flex flex-col items-center p-2">
+                        {sign.image ? (
+                          <div className="w-20 h-20 flex items-center justify-center bg-white rounded-md shadow-sm overflow-hidden">
+                            <ImageWithFallback 
+                              src={sign.image} 
+                              alt={`ASL sign for ${sign.char}`} 
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-20 h-20 flex items-center justify-center bg-teal-100 rounded-md shadow-sm">
+                            <span className="text-2xl font-bold text-teal-800">{sign.char}</span>
+                          </div>
+                        )}
+                        <div className="w-24 mt-2">
+                          <span className="text-xs text-teal-700 text-center block">
+                            {sign.char === ' ' ? 'Space' : sign.char.toUpperCase()}
+                          </span>
+                          <span className="text-xs text-teal-600 text-center block mt-1">
+                            {sign.description}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="w-1/2 bg-teal-100 rounded-full h-4">
-                  <div 
-                    className="h-4 rounded-full" 
-                    style={{ width: `${Math.floor(Math.random() * 30) + 65}%`, backgroundColor: '#53AAA1' }}
-                  ></div>
-                </div>
-              </div>
+              )}
             </div>
           )}
         </div>
@@ -472,9 +427,9 @@ const SignLanguageTranslator = () => {
         <h3 className="text-lg font-medium text-teal-800 mb-2">How to use this translator</h3>
         <ul className="text-sm text-teal-700 list-disc pl-5 space-y-1">
           <li>For Text to Sign: Type any text and click "Translate" to see the corresponding ASL sign images.</li>
-          <li>For Sign to Text: Upload an image of a hand sign or sign language gesture to get a text translation.</li>
-          <li>For best results, ensure your hand sign is clear, well-lit, and centered in the image.</li>
-          <li>The recognition model works best with single-letter ASL signs against a simple background.</li>
+          <li>For Image to Sign: Upload an image containing text. The app will extract the text and convert it to sign language.</li>
+          <li>For best results with text extraction, ensure the text in the image is clear and readable.</li>
+          <li>The app recognizes standard English characters and converts them to American Sign Language (ASL).</li>
         </ul>
       </div>
       
