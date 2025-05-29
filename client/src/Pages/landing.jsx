@@ -66,7 +66,7 @@ const Landing = () => {
               </span>
             </h2>
           </div>
-          <div className="text-lg">learn to connect with deaf people</div>
+          <div className="text-2xl">learn to connect with deaf people</div>
           <div className="flex gap-8 mt-10 text-2xl items-center">
             <Link to="/learn" className="bg-sec rounded-full px-12 py-3 border-[2px] border-black whitespace-nowrap hover:translate-y-1 duration-300">Start Learning</Link>
             <Link to='/videos' className="flex gap-3 items-center px-12 py-3 rounded-full hover:bg-main whitespace-nowrap">
@@ -81,7 +81,7 @@ const Landing = () => {
 
       {/* What We Do Section */}
       <section className="px-[8%] py-20 bg-white text-black">
-        <h2 className="text-4xl font-semibold mb-14 text-center">What We Do & How We Help</h2>
+        <h2 className="text-4xl font-semibold mb-14 text-center">Join Us With</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {features.map((feature, idx) => (
             <div key={idx} className="bg-white rounded-2xl shadow-md border border-black p-6 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 duration-300">
