@@ -21,6 +21,7 @@ mongoose.connect(process.env.MONGO_URI)
 const jwtsec = process.env.JWT_SECRET;
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+PORT = process.env.PORT || 3000;
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -121,8 +122,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-// Serve uploaded files statically
-// This is crucial for accessing uploaded profile images
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.get('/auth/google',
@@ -210,7 +210,7 @@ app.get('/profile', async (req, res) => {
             const userData = await User.findById(decodedToken.id)
             if (!userData) return res.status(404).json({ message: 'User not found' })
 
-            // Format the profile picture URL to ensure it's accessible
+            
             if (userData.profilePicture && !userData.profilePicture.startsWith('http')) {
                 // Make sure we're returning a full URL for local images
                 userData._doc.profilePicture = `http://localhost:3000${userData.profilePicture}`;
@@ -337,6 +337,6 @@ app.get('/', (req, res) => {
     res.send('the server is running')
 })
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log('Server running on port 3000')
 })
