@@ -12,13 +12,15 @@ const session = require('express-session')
 const multer = require('multer')
 const path = require('path')
 const fs = require('fs')
+const dotenv = require("dotenv")
 
-mongoose.connect('mongodb://localhost:27017/collegePro')
+dotenv.config();
 
-const jwtsec = 'lskjf24yi2o3u429034u90irjjss'
+mongoose.connect(process.env.MONGO_URI)
 
-const GOOGLE_CLIENT_ID = '841232493295-6c4849ib19vnv5o2htof9g9b6u6mailt.apps.googleusercontent.com'
-const GOOGLE_CLIENT_SECRET = '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'
+const jwtsec = process.env.JWT_SECRET;
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({

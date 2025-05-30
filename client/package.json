@@ -16,6 +16,7 @@
     "@tensorflow/tfjs": "^4.22.0",
     "@tensorflow/tfjs-backend-webgl": "^4.22.0",
     "axios": "^1.8.4",
+    "dotenv": "^16.5.0",
     "fingerpose": "^0.1.0",
     "framer": "^2.4.1",
     "lucide-react": "^0.503.0",
