@@ -5,8 +5,8 @@ import App from './App.jsx'
 import axios from 'axios'
 
 //
-//http://localhost:3000
-axios.defaults.baseURL = 'https://signguide-backend-xhsq.onrender.com';
+//https://signguide-backend-xhsq.onrender.com
+axios.defaults.baseURL = 'http://localhost:3000';
 axios.defaults.withCredentials = true
 
 createRoot(document.getElementById('root')).render(
