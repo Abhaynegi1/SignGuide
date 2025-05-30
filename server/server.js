@@ -58,7 +58,7 @@ const upload = multer({
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/callback",
+    callbackURL: "https://signguide-backend-xhsq.onrender.com/auth/google/callback",
     passReqToCallback: true
 },
 async function(req, accessToken, refreshToken, profile, done) {
@@ -130,7 +130,7 @@ app.get('/auth/google',
 )
 
 app.get('/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: 'http://localhost:5173/login' }),
+    passport.authenticate('google', { failureRedirect: 'https://signguide.onrender.com/login' }),
     (req, res) => {
         const token = jwt.sign(
             { id: req.user._id, username: req.user.username, profilePicture: req.user.profilePicture },
@@ -143,7 +143,7 @@ app.get('/auth/google/callback',
             secure: process.env.NODE_ENV === 'production',
         })
 
-        res.redirect('http://localhost:5173/profile')
+        res.redirect('https://signguide.onrender.com/profile')
     }
 )
 
@@ -213,7 +213,7 @@ app.get('/profile', async (req, res) => {
             
             if (userData.profilePicture && !userData.profilePicture.startsWith('http')) {
                 // Make sure we're returning a full URL for local images
-                userData._doc.profilePicture = `http://localhost:3000${userData.profilePicture}`;
+                userData._doc.profilePicture = `https://signguide-backend-xhsq.onrender.com${userData.profilePicture}`;
             }
 
             res.status(200).json(userData)
@@ -295,7 +295,7 @@ app.put('/api/user/profile', upload.single('profileImage'), async (req, res) => 
                     userData.profilePicture = user.profilePicture;
                 } else {
                     // If it's a local path, prepend the server URL
-                    userData.profilePicture = `http://localhost:3000${user.profilePicture}`;
+                    userData.profilePicture = `https://signguide-backend-xhsq.onrender.com${user.profilePicture}`;
                 }
             }
             
