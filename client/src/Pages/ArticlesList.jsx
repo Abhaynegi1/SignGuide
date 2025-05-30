@@ -14,7 +14,9 @@ const ArticlesList = () => {
     fetch("/data/articles.json")
       .then((res) => res.json())
       .then((data) => {
-        setArticles(data.articles);
+        // Sort articles by numeric ID to ensure correct order
+        const sortedArticles = data.articles.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+        setArticles(sortedArticles);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -24,13 +26,14 @@ const ArticlesList = () => {
   }, []);
 
   const isArticleUnlocked = (articleId) => {
-    if (articleId === "basics") return true;
+    const currentArticleNumber = parseInt(articleId);
     
-    const articleSequence = ["basics", "conversation", "advanced"];
-    const articleIndex = articleSequence.indexOf(articleId);
-    const previousArticle = articleSequence[articleIndex - 1];
+    // First article (ID: 1) is always unlocked
+    if (currentArticleNumber === 1) return true;
     
-    return watchedArticles.includes(previousArticle);
+    // Check if the previous article has been completed
+    const previousArticleId = (currentArticleNumber - 1).toString();
+    return watchedArticles.includes(previousArticleId);
   };
 
   if (isLoading) {
@@ -44,13 +47,16 @@ const ArticlesList = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.map((article) => {
           const isUnlocked = isArticleUnlocked(article.id);
+          const isWatched = watchedArticles.includes(article.id);
           
           return (
             <div 
               key={article.id} 
-              className={`border rounded-lg overflow-hidden shadow-md ${!isUnlocked ? "opacity-70" : ""}`}
+              className={`border rounded-lg overflow-hidden shadow-md transition-all ${
+                !isUnlocked ? "opacity-70" : ""
+              } ${isWatched ? "ring-2 ring-green-500" : ""}`}
             >
-              <div className="relative h-48">
+              <div className="relative h-60">
                 <img
                   src={article.thumbnail}
                   alt={article.title}
@@ -69,12 +75,35 @@ const ArticlesList = () => {
                   </div>
                 )}
                 
+                {isWatched && (
+                  <div className="absolute top-2 right-2 bg-green-500 text-white rounded-full p-1">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                )}
+                
                 <span className="absolute bottom-2 right-2 bg-black text-white text-xs px-2 py-1 rounded">
                   {article.readTime}
                 </span>
               </div>
               
               <div className="p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+                    Article {article.id}
+                  </span>
+                  {isWatched && (
+                    <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">
+                      Completed
+                    </span>
+                  )}
+                </div>
+                
                 <h2 className="text-xl font-semibold mb-2">{article.title}</h2>
                 <p className="text-gray-600 mb-4 text-sm">{article.summary}</p>
                 
@@ -87,7 +116,7 @@ const ArticlesList = () => {
                   </Link>
                 ) : (
                   <div className="text-center text-sm text-gray-500 py-2 px-4 bg-gray-100 rounded">
-                    Complete previous article to unlock
+                    Complete article {parseInt(article.id) - 1} to unlock
                   </div>
                 )}
               </div>

@@ -1,263 +1,243 @@
 {
-    "articles": [
-      {
-        "id": "basics",
-        "title": "Introduction to Sign Language",
-        "summary": "Learn the fundamental signs and gestures in Sign Language.",
-        "thumbnail": "/article/introduction.png",
-        "readTime": "4 min read",
-        "content": [
-          {
-            "type": "text",
-            "value": "Before learning full signs and conversations, it's important to understand the basics of sign language. The alphabet and numbers are foundational. Knowing how to fingerspell helps you spell names, unfamiliar words, or places that might not have a dedicated sign. Numbers are just as important for daily communication, whether you're giving your age, phone number, or talking about time."
-          },
-          {
-            "type": "image",
-            "src": "https://kidscarehomehealth.com/wp-content/uploads/2022/08/KCHH-sign-language-hello.jpg",
-            "alt": "Basic ASL hand positions"
-          },
-          {
-            "type": "text",
-            "value": "Fingerspelling is a visual way of spelling out words using hand shapes that represent each letter of the alphabet. It includes 26 unique hand signs, each standing for one letter from A to Z. Fingerspelling is mainly used for proper nouns, like names and cities, or words that do not have an official sign yet. It’s a slow process at first, but with practice, you’ll get faster and more accurate."
-          },
-          {
-            "type": "text",
-            "value": "Start with a few letters each day instead of trying to learn all at once. Use a mirror to check your hand shapes and practice in front of a friend if possible. Mobile apps and online videos can also help reinforce your learning. Most importantly, focus on clarity—each letter should be easy to read and not rushed."
-          },
-          {
-            "type": "image",
-            "src": "https://cdn.prod.website-files.com/5f0a377561756321899b9e96/67d807d703544680ff4f3b15__asl-alphabet.png",
-            "alt": "ASL alphabet"
-          },
-          {
-            "type": "text",
-            "value": "Learning numbers is the next step. Sign language uses distinct hand shapes to represent numbers. The signs for 1–10 are usually one-handed and simple, while numbers 11–20 involve more motion, like flicks or movements. Once you’re confident with these, you can move on to higher numbers and time-based signs like hours and minutes."
-          },
-          {
-            "type": "image",
-            "src": "https://signstation.org/wp-content/uploads/2021/09/How-to-Count-in-Sign-Language.jpg",
-            "alt": "ASL numbers"
-          },
-          {
-            "type": "text",
-            "value": "Try spelling your name using fingerspelling. Then spell the names of your family members or friends. Count objects around you like books, pens, or steps. Daily repetition is key—just 5 to 10 minutes a day can make a big difference."
-          }
-        ]
-      },
-      {
-        "id": "conversation",
-        "title": "Basic Greetings",
-        "summary": "Essential signs for daily communication and interactions.",
-        "thumbnail": "/article/basic.png",
-        "readTime": "5 min read",
-        "content": [
-          {
-            "type": "text",
-            "value": "After learning the alphabet and numbers, it's time to begin using full signs that you can apply in daily interactions. Greetings form the foundation of any communication, whether spoken or signed. In sign language, greetings are clear, expressive, and often accompanied by facial expressions that carry emotion and tone. Learning them early helps you start short conversations and interact respectfully with others."
-          },
-          {
-            "type": "text",
-            "value": "The most common greetings in sign language include hello, goodbye, thank you, please, sorry, yes, no, how are you, I’m fine, and nice to meet you. These signs are used frequently and are essential for both casual and formal communication. Practicing them regularly will help you feel more confident in real-life situations."
-          },
-          {
-            "type": "image",
-            "src": "https://i.pinimg.com/736x/a7/df/e7/a7dfe7dba55d7ff62473acdfb45d34d1.jpg",
-            "alt": "Greeting signs in ASL"
-          },
-          {
-            "type": "text",
-            "value": "To get comfortable, practice each sign in front of a mirror. Watch how your hand shapes look and also focus on your face—sign language relies heavily on facial expressions to communicate intent and emotion. For example, when you sign “sorry,” a gentle expression adds sincerity, while raised eyebrows during “how are you” indicate you’re asking a question."
-          },
-          {
-            "type": "text",
-            "value": "Once you’ve learned the signs, try forming small exchanges. Say hello and ask someone how they are. Then reply with 'I'm fine' and maybe add a thank you. Repeating short conversations helps your brain remember the structure and flow."
-          },
-          {
-            "type": "image",
-            "src": "https://s3.gomedia.ws/wp-content/uploads/sites/72/2021/06/18135315/AdobeStock_259682082-scaled.jpeg",
-            "alt": "Question formation in ASL"
-          },
-          {
-            "type": "text",
-            "value": "Make sure to go slow at first. Accuracy is more important than speed in the beginning. Over time, your signing will become more natural and fluid. As you get comfortable with these greetings, you'll find it easier to move into longer conversations and more advanced topics."
-          }
-        ]
-      },
-      {
-        "id": "advanced",
-        "title": "Everyday Vocabulary",
-        "summary": "Take your signing skills to the next level with everyday vocabulary.",
-        "thumbnail": "/article/everyday.png",
-        "readTime": "7 min read",
-        "content": [
-          {
-            "type": "text",
-            "value": "Before learning full signs and conversations, it's important to understand the basics of sign language. The alphabet and numbers are foundational. Knowing how to fingerspell helps you spell names, unfamiliar words, or places that might not have a dedicated sign. Numbers are just as important for daily communication, whether you're giving your age, phone number, or talking about time."
-          },
-          {
-            "type": "image",
-            "src": "https://kidscarehomehealth.com/wp-content/uploads/2022/08/KCHH-sign-language-hello.jpg",
-            "alt": "Basic ASL hand positions"
-          },
-          {
-            "type": "text",
-            "value": "Fingerspelling is a visual way of spelling out words using hand shapes that represent each letter of the alphabet. It includes 26 unique hand signs, each standing for one letter from A to Z. Fingerspelling is mainly used for proper nouns, like names and cities, or words that do not have an official sign yet. It’s a slow process at first, but with practice, you’ll get faster and more accurate."
-          },
-          {
-            "type": "text",
-            "value": "Start with a few letters each day instead of trying to learn all at once. Use a mirror to check your hand shapes and practice in front of a friend if possible. Mobile apps and online videos can also help reinforce your learning. Most importantly, focus on clarity—each letter should be easy to read and not rushed."
-          },
-          {
-            "type": "image",
-            "src": "https://cdn.prod.website-files.com/5f0a377561756321899b9e96/67d807d703544680ff4f3b15__asl-alphabet.png",
-            "alt": "ASL alphabet"
-          },
-          {
-            "type": "text",
-            "value": "Learning numbers is the next step. Sign language uses distinct hand shapes to represent numbers. The signs for 1–10 are usually one-handed and simple, while numbers 11–20 involve more motion, like flicks or movements. Once you’re confident with these, you can move on to higher numbers and time-based signs like hours and minutes."
-          },
-          {
-            "type": "image",
-            "src": "https://signstation.org/wp-content/uploads/2021/09/How-to-Count-in-Sign-Language.jpg",
-            "alt": "ASL numbers"
-          },
-          {
-            "type": "text",
-            "value": "Try spelling your name using fingerspelling. Then spell the names of your family members or friends. Count objects around you like books, pens, or steps. Daily repetition is key—just 5 to 10 minutes a day can make a big difference."
-          }
-        ]
-      },
-      {
-        "id": "advanced",
-        "title": "Simple Sentences",
-        "summary": "Take your signing skills to the next level with everyday vocabulary.",
-        "thumbnail": "/article/simple.png",
-        "readTime": "7 min read",
-        "content": [
-          {
-            "type": "text",
-            "value": "Before learning full signs and conversations, it's important to understand the basics of sign language. The alphabet and numbers are foundational. Knowing how to fingerspell helps you spell names, unfamiliar words, or places that might not have a dedicated sign. Numbers are just as important for daily communication, whether you're giving your age, phone number, or talking about time."
-          },
-          {
-            "type": "image",
-            "src": "https://kidscarehomehealth.com/wp-content/uploads/2022/08/KCHH-sign-language-hello.jpg",
-            "alt": "Basic ASL hand positions"
-          },
-          {
-            "type": "text",
-            "value": "Fingerspelling is a visual way of spelling out words using hand shapes that represent each letter of the alphabet. It includes 26 unique hand signs, each standing for one letter from A to Z. Fingerspelling is mainly used for proper nouns, like names and cities, or words that do not have an official sign yet. It’s a slow process at first, but with practice, you’ll get faster and more accurate."
-          },
-          {
-            "type": "text",
-            "value": "Start with a few letters each day instead of trying to learn all at once. Use a mirror to check your hand shapes and practice in front of a friend if possible. Mobile apps and online videos can also help reinforce your learning. Most importantly, focus on clarity—each letter should be easy to read and not rushed."
-          },
-          {
-            "type": "image",
-            "src": "https://cdn.prod.website-files.com/5f0a377561756321899b9e96/67d807d703544680ff4f3b15__asl-alphabet.png",
-            "alt": "ASL alphabet"
-          },
-          {
-            "type": "text",
-            "value": "Learning numbers is the next step. Sign language uses distinct hand shapes to represent numbers. The signs for 1–10 are usually one-handed and simple, while numbers 11–20 involve more motion, like flicks or movements. Once you’re confident with these, you can move on to higher numbers and time-based signs like hours and minutes."
-          },
-          {
-            "type": "image",
-            "src": "https://signstation.org/wp-content/uploads/2021/09/How-to-Count-in-Sign-Language.jpg",
-            "alt": "ASL numbers"
-          },
-          {
-            "type": "text",
-            "value": "Try spelling your name using fingerspelling. Then spell the names of your family members or friends. Count objects around you like books, pens, or steps. Daily repetition is key—just 5 to 10 minutes a day can make a big difference."
-          }
-        ]
-      },
-      {
-        "id": "advanced",
-        "title": "Emotions & Expressions",
-        "summary": "Take your signing skills to the next level with everyday vocabulary.",
-        "thumbnail": "/article/emotions.png",
-        "readTime": "7 min read",
-        "content": [
-          {
-            "type": "text",
-            "value": "Before learning full signs and conversations, it's important to understand the basics of sign language. The alphabet and numbers are foundational. Knowing how to fingerspell helps you spell names, unfamiliar words, or places that might not have a dedicated sign. Numbers are just as important for daily communication, whether you're giving your age, phone number, or talking about time."
-          },
-          {
-            "type": "image",
-            "src": "https://kidscarehomehealth.com/wp-content/uploads/2022/08/KCHH-sign-language-hello.jpg",
-            "alt": "Basic ASL hand positions"
-          },
-          {
-            "type": "text",
-            "value": "Fingerspelling is a visual way of spelling out words using hand shapes that represent each letter of the alphabet. It includes 26 unique hand signs, each standing for one letter from A to Z. Fingerspelling is mainly used for proper nouns, like names and cities, or words that do not have an official sign yet. It’s a slow process at first, but with practice, you’ll get faster and more accurate."
-          },
-          {
-            "type": "text",
-            "value": "Start with a few letters each day instead of trying to learn all at once. Use a mirror to check your hand shapes and practice in front of a friend if possible. Mobile apps and online videos can also help reinforce your learning. Most importantly, focus on clarity—each letter should be easy to read and not rushed."
-          },
-          {
-            "type": "image",
-            "src": "https://cdn.prod.website-files.com/5f0a377561756321899b9e96/67d807d703544680ff4f3b15__asl-alphabet.png",
-            "alt": "ASL alphabet"
-          },
-          {
-            "type": "text",
-            "value": "Learning numbers is the next step. Sign language uses distinct hand shapes to represent numbers. The signs for 1–10 are usually one-handed and simple, while numbers 11–20 involve more motion, like flicks or movements. Once you’re confident with these, you can move on to higher numbers and time-based signs like hours and minutes."
-          },
-          {
-            "type": "image",
-            "src": "https://signstation.org/wp-content/uploads/2021/09/How-to-Count-in-Sign-Language.jpg",
-            "alt": "ASL numbers"
-          },
-          {
-            "type": "text",
-            "value": "Try spelling your name using fingerspelling. Then spell the names of your family members or friends. Count objects around you like books, pens, or steps. Daily repetition is key—just 5 to 10 minutes a day can make a big difference."
-          }
-        ]
-      },
-      {
-        "id": "advanced",
-        "title": "Directions & Space",
-        "summary": "Take your signing skills to the next level with everyday vocabulary.",
-        "thumbnail": "/article/directions.png",
-        "readTime": "7 min read",
-        "content": [
-          {
-            "type": "text",
-            "value": "Before learning full signs and conversations, it's important to understand the basics of sign language. The alphabet and numbers are foundational. Knowing how to fingerspell helps you spell names, unfamiliar words, or places that might not have a dedicated sign. Numbers are just as important for daily communication, whether you're giving your age, phone number, or talking about time."
-          },
-          {
-            "type": "image",
-            "src": "https://kidscarehomehealth.com/wp-content/uploads/2022/08/KCHH-sign-language-hello.jpg",
-            "alt": "Basic ASL hand positions"
-          },
-          {
-            "type": "text",
-            "value": "Fingerspelling is a visual way of spelling out words using hand shapes that represent each letter of the alphabet. It includes 26 unique hand signs, each standing for one letter from A to Z. Fingerspelling is mainly used for proper nouns, like names and cities, or words that do not have an official sign yet. It’s a slow process at first, but with practice, you’ll get faster and more accurate."
-          },
-          {
-            "type": "text",
-            "value": "Start with a few letters each day instead of trying to learn all at once. Use a mirror to check your hand shapes and practice in front of a friend if possible. Mobile apps and online videos can also help reinforce your learning. Most importantly, focus on clarity—each letter should be easy to read and not rushed."
-          },
-          {
-            "type": "image",
-            "src": "https://cdn.prod.website-files.com/5f0a377561756321899b9e96/67d807d703544680ff4f3b15__asl-alphabet.png",
-            "alt": "ASL alphabet"
-          },
-          {
-            "type": "text",
-            "value": "Learning numbers is the next step. Sign language uses distinct hand shapes to represent numbers. The signs for 1–10 are usually one-handed and simple, while numbers 11–20 involve more motion, like flicks or movements. Once you’re confident with these, you can move on to higher numbers and time-based signs like hours and minutes."
-          },
-          {
-            "type": "image",
-            "src": "https://signstation.org/wp-content/uploads/2021/09/How-to-Count-in-Sign-Language.jpg",
-            "alt": "ASL numbers"
-          },
-          {
-            "type": "text",
-            "value": "Try spelling your name using fingerspelling. Then spell the names of your family members or friends. Count objects around you like books, pens, or steps. Daily repetition is key—just 5 to 10 minutes a day can make a big difference."
-          }
-        ]
-      }
-    ]
-  }
+  "articles": [
+    {
+      "id": "1",
+      "title": "Introduction to Sign Language",
+      "summary": "Learn the fundamental signs and gestures in Sign Language.",
+      "thumbnail": "/article/introduction.png",
+      "readTime": "4 min read",
+      "content": [
+        {
+          "type": "text",
+          "value": "Before learning full signs and conversations, it's important to understand the basics of sign language. The alphabet and numbers are foundational. Knowing how to fingerspell helps you spell names, unfamiliar words, or places that might not have a dedicated sign. Numbers are just as important for daily communication, whether you're giving your age, phone number, or talking about time."
+        },
+        {
+          "type": "image",
+          "src": "https://kidscarehomehealth.com/wp-content/uploads/2022/08/KCHH-sign-language-hello.jpg",
+          "alt": "Basic ASL hand positions"
+        },
+        {
+          "type": "text",
+          "value": "Fingerspelling is a visual way of spelling out words using hand shapes that represent each letter of the alphabet. It includes 26 unique hand signs, each standing for one letter from A to Z. Fingerspelling is mainly used for proper nouns, like names and cities, or words that do not have an official sign yet. It's a slow process at first, but with practice, you'll get faster and more accurate."
+        },
+        {
+          "type": "text",
+          "value": "Start with a few letters each day instead of trying to learn all at once. Use a mirror to check your hand shapes and practice in front of a friend if possible. Mobile apps and online videos can also help reinforce your learning. Most importantly, focus on clarity—each letter should be easy to read and not rushed."
+        },
+        {
+          "type": "image",
+          "src": "https://cdn.prod.website-files.com/5f0a377561756321899b9e96/67d807d703544680ff4f3b15__asl-alphabet.png",
+          "alt": "ASL alphabet"
+        },
+        {
+          "type": "text",
+          "value": "Learning numbers is the next step. Sign language uses distinct hand shapes to represent numbers. The signs for 1–10 are usually one-handed and simple, while numbers 11–20 involve more motion, like flicks or movements. Once you're confident with these, you can move on to higher numbers and time-based signs like hours and minutes."
+        },
+        {
+          "type": "image",
+          "src": "https://signstation.org/wp-content/uploads/2021/09/How-to-Count-in-Sign-Language.jpg",
+          "alt": "ASL numbers"
+        },
+        {
+          "type": "text",
+          "value": "Try spelling your name using fingerspelling. Then spell the names of your family members or friends. Count objects around you like books, pens, or steps. Daily repetition is key—just 5 to 10 minutes a day can make a big difference."
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Basic Greetings",
+      "summary": "Essential signs for daily communication and interactions.",
+      "thumbnail": "/article/basic.png",
+      "readTime": "5 min read",
+      "content": [
+        {
+          "type": "text",
+          "value": "After learning the alphabet and numbers, it's time to begin using full signs that you can apply in daily interactions. Greetings form the foundation of any communication, whether spoken or signed. In sign language, greetings are clear, expressive, and often accompanied by facial expressions that carry emotion and tone. Learning them early helps you start short conversations and interact respectfully with others."
+        },
+        {
+          "type": "text",
+          "value": "The most common greetings in sign language include hello, goodbye, thank you, please, sorry, yes, no, how are you, I'm fine, and nice to meet you. These signs are used frequently and are essential for both casual and formal communication. Practicing them regularly will help you feel more confident in real-life situations."
+        },
+        {
+          "type": "image",
+          "src": "https://i.pinimg.com/736x/a7/df/e7/a7dfe7dba55d7ff62473acdfb45d34d1.jpg",
+          "alt": "Greeting signs in ASL"
+        },
+        {
+          "type": "text",
+          "value": "To get comfortable, practice each sign in front of a mirror. Watch how your hand shapes look and also focus on your face—sign language relies heavily on facial expressions to communicate intent and emotion. For example, when you sign \"sorry,\" a gentle expression adds sincerity, while raised eyebrows during \"how are you\" indicate you're asking a question."
+        },
+        {
+          "type": "text",
+          "value": "Once you've learned the signs, try forming small exchanges. Say hello and ask someone how they are. Then reply with 'I'm fine' and maybe add a thank you. Repeating short conversations helps your brain remember the structure and flow."
+        },
+        {
+          "type": "image",
+          "src": "https://s3.gomedia.ws/wp-content/uploads/sites/72/2021/06/18135315/AdobeStock_259682082-scaled.jpeg",
+          "alt": "Question formation in ASL"
+        },
+        {
+          "type": "text",
+          "value": "Make sure to go slow at first. Accuracy is more important than speed in the beginning. Over time, your signing will become more natural and fluid. As you get comfortable with these greetings, you'll find it easier to move into longer conversations and more advanced topics."
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Everyday Vocabulary",
+      "summary": "Take your signing skills to the next level with everyday vocabulary.",
+      "thumbnail": "/article/everyday.png",
+      "readTime": "7 min read",
+      "content": [
+        {
+          "type": "text",
+          "value": "Vocabulary in American Sign Language (ASL) is more than just a collection of signs — it’s a visual language that uses hand shapes, facial expressions, and body movements to convey meaning. Like spoken languages, ASL has its own grammar and structure, and vocabulary in ASL develops through use, context, and community. Every sign carries weight not only in meaning but also in emotion and nuance, shaped by how it's delivered."
+        },
+        {
+          "type": "text",
+          "value": "Basic ASL vocabulary includes common everyday words like “hello,” “thank you,” “please,” “sorry,” and signs for family members, food, feelings, and actions. Each sign has a specific motion and shape, and the clarity of expression matters a lot. For example, the sign for “happy” is different from “excited” not just in motion but also in the intensity and placement of the sign on the body. This adds richness to how ideas and emotions are expressed."
+        },
+        {
+          "type": "image",
+          "src": "https://signstation.org/wp-content/uploads/2021/09/How-to-Count-in-Sign-Language.jpg",
+          "alt": "Everyday ASL vocabulary"
+        },
+        {
+          "type": "text",
+          "value": "Emotional expressions are crucial in sign language. Learn signs for happy, sad, angry, excited, tired, and confused. These help you communicate how you feel and understand others' emotions. Remember that facial expressions should match the emotion you're signing to make your communication more authentic."
+        },
+        {
+          "type": "text",
+          "value": "Time-related vocabulary is also important. Learn signs for today, tomorrow, yesterday, morning, afternoon, evening, and days of the week. This allows you to talk about when things happen and make plans with others."
+        },
+        {
+          "type": "image",
+          "src": "https://kidscarehomehealth.com/wp-content/uploads/2022/08/KCHH-sign-language-hello.jpg",
+          "alt": "Time signs in ASL"
+        },
+        {
+          "type": "text",
+          "value": "Practice combining these vocabulary words with the greetings you've already learned. Try creating simple sentences like 'I am happy today' or 'My family is at home.' This combination practice helps you transition from individual signs to flowing conversations."
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Advanced Conversations",
+      "summary": "Learn complex sentence structures and advanced signing techniques.",
+      "thumbnail": "/article/emotions.png",
+      "readTime": "8 min read",
+      "content": [
+        {
+          "type": "text",
+          "value": "As you become more comfortable with basic vocabulary and greetings, it's time to learn how to construct more complex sentences and engage in longer conversations. Advanced sign language involves understanding grammar structures, proper use of space, and incorporating non-manual markers like facial expressions and body language."
+        },
+        {
+          "type": "text",
+          "value": "Sign language grammar differs from spoken language grammar. Word order is often more flexible, and meaning can be conveyed through the use of space, direction of movement, and facial expressions. Learn to use classifiers, which are handshapes that represent categories of objects or show how something moves or looks."
+        },
+        {
+          "type": "image",
+          "src": "https://i.pinimg.com/736x/a7/df/e7/a7dfe7dba55d7ff62473acdfb45d34d1.jpg",
+          "alt": "Advanced ASL grammar concepts"
+        },
+        {
+          "type": "text",
+          "value": "Practice asking and answering more complex questions. Learn question words like who, what, when, where, why, and how. These allow you to gather information and engage in meaningful discussions. Remember that question signs are often accompanied by raised eyebrows and a forward lean of the head."
+        },
+        {
+          "type": "text",
+          "value": "Learn to express past, present, and future tenses clearly. Use time markers at the beginning of sentences to establish when something happened or will happen. Practice describing events in sequence and telling stories using appropriate transitions between ideas."
+        },
+        {
+          "type": "image",
+          "src": "https://cdn.prod.website-files.com/5f0a377561756321899b9e96/67d807d703544680ff4f3b15__asl-alphabet.png",
+          "alt": "Complex sentence structures in ASL"
+        },
+        {
+          "type": "text",
+          "value": "Focus on developing conversational flow. Practice maintaining eye contact, taking turns appropriately, and using appropriate pausing. Learn to express agreement, disagreement, and ask for clarification when you don't understand something. These skills are essential for natural, flowing conversations."
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "title": "Simple Sentences",
+      "summary": "Master professional and formal sign language communication.",
+      "thumbnail": "/article/simple.png",
+      "readTime": "10 min read",
+      "content": [
+        {
+          "type": "text",
+          "value": "Professional sign language communication requires a higher level of precision, formality, and specialized vocabulary. Whether you're preparing for workplace interactions, academic settings, or formal presentations, mastering professional signing techniques is essential for effective communication in formal environments."
+        },
+        {
+          "type": "text",
+          "value": "Learn professional vocabulary related to business, education, healthcare, and legal contexts. This includes terms for meetings, presentations, deadlines, policies, procedures, and professional roles. Understanding industry-specific signs helps you communicate effectively in your chosen field."
+        },
+        {
+          "type": "image",
+          "src": "https://s3.gomedia.ws/wp-content/uploads/sites/72/2021/06/18135315/AdobeStock_259682082-scaled.jpeg",
+          "alt": "Professional ASL vocabulary"
+        },
+        {
+          "type": "text",
+          "value": "Master formal presentation skills including how to introduce yourself professionally, present information clearly, and handle questions from an audience. Practice using appropriate body language, maintaining professional posture, and using space effectively during formal presentations."
+        },
+        {
+          "type": "text",
+          "value": "Learn to adapt your signing style for different professional contexts. Formal meetings require more structured communication, while collaborative work might allow for more casual interaction. Understanding when and how to adjust your communication style shows professional maturity."
+        },
+        {
+          "type": "image",
+          "src": "https://kidscarehomehealth.com/wp-content/uploads/2022/08/KCHH-sign-language-hello.jpg",
+          "alt": "Formal presentation techniques in ASL"
+        },
+        {
+          "type": "text",
+          "value": "Develop skills for professional networking and relationship building. Learn to make small talk appropriately, exchange contact information, and follow up on professional conversations. These interpersonal skills are just as important in sign language as they are in spoken communication."
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "title": "Asking Directions",
+      "summary": "Master professional and formal sign language communication.",
+      "thumbnail": "/article/directions.png",
+      "readTime": "10 min read",
+      "content": [
+        {
+          "type": "text",
+          "value": "Professional sign language communication requires a higher level of precision, formality, and specialized vocabulary. Whether you're preparing for workplace interactions, academic settings, or formal presentations, mastering professional signing techniques is essential for effective communication in formal environments."
+        },
+        {
+          "type": "text",
+          "value": "Learn professional vocabulary related to business, education, healthcare, and legal contexts. This includes terms for meetings, presentations, deadlines, policies, procedures, and professional roles. Understanding industry-specific signs helps you communicate effectively in your chosen field."
+        },
+        {
+          "type": "image",
+          "src": "https://s3.gomedia.ws/wp-content/uploads/sites/72/2021/06/18135315/AdobeStock_259682082-scaled.jpeg",
+          "alt": "Professional ASL vocabulary"
+        },
+        {
+          "type": "text",
+          "value": "Master formal presentation skills including how to introduce yourself professionally, present information clearly, and handle questions from an audience. Practice using appropriate body language, maintaining professional posture, and using space effectively during formal presentations."
+        },
+        {
+          "type": "text",
+          "value": "Learn to adapt your signing style for different professional contexts. Formal meetings require more structured communication, while collaborative work might allow for more casual interaction. Understanding when and how to adjust your communication style shows professional maturity."
+        },
+        {
+          "type": "image",
+          "src": "https://kidscarehomehealth.com/wp-content/uploads/2022/08/KCHH-sign-language-hello.jpg",
+          "alt": "Formal presentation techniques in ASL"
+        },
+        {
+          "type": "text",
+          "value": "Develop skills for professional networking and relationship building. Learn to make small talk appropriately, exchange contact information, and follow up on professional conversations. These interpersonal skills are just as important in sign language as they are in spoken communication."
+        }
+      ]
+    }
+  ]
+}
