@@ -21,7 +21,17 @@ mongoose.connect(process.env.MONGO_URI)
 const jwtsec = process.env.JWT_SECRET;
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
-PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
+
+// Environment-based URLs - More flexible detection
+const isProduction = process.env.NODE_ENV === 'production' || process.env.RENDER;
+const BACKEND_URL = process.env.BACKEND_URL || (isProduction ? 'https://signguide-backend-xhsq.onrender.com' : `http://localhost:${PORT}`);
+const FRONTEND_URL = process.env.FRONTEND_URL || (isProduction ? 'https://signguide.onrender.com' : 'http://localhost:5173');
+
+console.log('Environment Configuration:');
+console.log('Is Production:', isProduction);
+console.log('Backend URL:', BACKEND_URL);
+console.log('Frontend URL:', FRONTEND_URL);
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -58,7 +68,7 @@ const upload = multer({
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/callback",
+    callbackURL: `${BACKEND_URL}/auth/google/callback`,
     passReqToCallback: true
 },
 async function(req, accessToken, refreshToken, profile, done) {
@@ -103,10 +113,18 @@ passport.deserializeUser(async (id, done) => {
     }
 })
 
-// CORS configuration
+// CORS configuration - More comprehensive
 app.use(cors({
     credentials: true,
-    origin: ['http://localhost:5173' , "https://signguide.onrender.com"]
+    origin: [
+        FRONTEND_URL,
+        'http://localhost:5173',
+        'http://localhost:3000', 
+        'https://signguide.onrender.com',
+        'https://signguide-backend-xhsq.onrender.com'
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
 }))
 
 app.use(express.json())
@@ -116,12 +134,16 @@ app.use(session({
     secret: jwtsec,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 3600000 }
+    cookie: { 
+        maxAge: 3600000,
+        secure: isProduction,
+        sameSite: isProduction ? 'none' : 'lax',
+        httpOnly: false // Allow frontend to access for debugging if needed
+    }
 }))
 
 app.use(passport.initialize())
 app.use(passport.session())
-
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -130,7 +152,7 @@ app.get('/auth/google',
 )
 
 app.get('/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: 'http://localhost:5173/login' }),
+    passport.authenticate('google', { failureRedirect: `${FRONTEND_URL}/login` }),
     (req, res) => {
         const token = jwt.sign(
             { id: req.user._id, username: req.user.username, profilePicture: req.user.profilePicture },
@@ -140,10 +162,11 @@ app.get('/auth/google/callback',
 
         res.cookie('token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
+            secure: isProduction,
+            sameSite: isProduction ? 'none' : 'lax'
         })
 
-        res.redirect('http://localhost:5173/profile')
+        res.redirect(`${FRONTEND_URL}/profile`)
     }
 )
 
@@ -177,7 +200,8 @@ app.post('/login', async (req, res) => {
 
             res.cookie('token', token, {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === 'production'
+                secure: isProduction,
+                sameSite: isProduction ? 'none' : 'lax'
             })
 
             return res.status(200).json({ message: 'Login successful', user })
@@ -193,7 +217,8 @@ app.post('/login', async (req, res) => {
 app.get('/logout', (req, res) => {
     res.cookie('token', '', {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
+        secure: isProduction,
+        sameSite: isProduction ? 'none' : 'lax',
         maxAge: 0
     })
     res.status(200).json({ message: 'Logged out successfully' })
@@ -210,10 +235,9 @@ app.get('/profile', async (req, res) => {
             const userData = await User.findById(decodedToken.id)
             if (!userData) return res.status(404).json({ message: 'User not found' })
 
-            
+            // Format profile picture URL based on environment
             if (userData.profilePicture && !userData.profilePicture.startsWith('http')) {
-                // Make sure we're returning a full URL for local images
-                userData._doc.profilePicture = `http://localhost:3000${userData.profilePicture}`;
+                userData._doc.profilePicture = `${BACKEND_URL}${userData.profilePicture}`;
             }
 
             res.status(200).json(userData)
@@ -277,7 +301,8 @@ app.put('/api/user/profile', upload.single('profileImage'), async (req, res) => 
             // Set the new token in the cookie
             res.cookie('token', updatedToken, {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === 'production'
+                secure: isProduction,
+                sameSite: isProduction ? 'none' : 'lax'
             });
             
             // Return the updated user data with formatted profile picture URL
@@ -288,14 +313,12 @@ app.put('/api/user/profile', upload.single('profileImage'), async (req, res) => 
                 quiz: user.quiz
             };
             
-            // Make sure the profile picture URL is properly formatted
+            // Format profile picture URL based on environment
             if (user.profilePicture) {
                 if (user.profilePicture.startsWith('http')) {
-                    // If it's already a full URL, use it as is
                     userData.profilePicture = user.profilePicture;
                 } else {
-                    // If it's a local path, prepend the server URL
-                    userData.profilePicture = `http://localhost:3000${user.profilePicture}`;
+                    userData.profilePicture = `${BACKEND_URL}${user.profilePicture}`;
                 }
             }
             
@@ -338,5 +361,8 @@ app.get('/', (req, res) => {
 })
 
 app.listen(PORT, () => {
-    console.log('Server running on port 3000')
+    console.log(`Server running on port ${PORT}`)
+    console.log(`Environment: ${isProduction ? 'Production' : 'Development'}`)
+    console.log(`Backend URL: ${BACKEND_URL}`)
+    console.log(`Frontend URL: ${FRONTEND_URL}`)
 })
