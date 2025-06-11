@@ -103,7 +103,7 @@ const Login = () => {
                     
                     {/* Google Sign-in Button */}
                     <a 
-                        href={`${window.location.origin}/auth/google`}
+                        href="https://signguide-backend-xhsq.onrender.com/auth/google"
                         className="flex items-center justify-center gap-2 h-16 w-full bg-white border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-all duration-200"
                     >
                         <FcGoogle className="text-2xl" />
