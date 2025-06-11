@@ -2,10 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
-const User = require('./Models/user')
-const bcrypt = require('bcryptjs')
 const cookieParser = require('cookie-parser')
-const jwt = require("jsonwebtoken")
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const session = require('express-session')
@@ -13,6 +10,10 @@ const multer = require('multer')
 const path = require('path')
 const fs = require('fs')
 const dotenv = require("dotenv")
+const userRoutes = require('./routes/userRoutes')
+const User = require('./Models/user')
+const bcrypt = require('bcryptjs')
+const jwt = require("jsonwebtoken")
 
 dotenv.config();
 
@@ -68,7 +69,7 @@ const upload = multer({
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: `${BACKEND_URL}/auth/google/callback`,
+    callbackURL: `${process.env.OAUTH_CALLBACK_URL || BACKEND_URL}/auth/google/callback`,
     passReqToCallback: true
 },
 async function(req, accessToken, refreshToken, profile, done) {
@@ -146,6 +147,8 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+app.use('/auth', userRoutes);
 
 app.get('/auth/google',
     passport.authenticate('google', { scope: ['profile', 'email'] })
@@ -248,7 +251,6 @@ app.get('/profile', async (req, res) => {
     }
 })
 
-// Add profile update route
 app.put('/api/user/profile', upload.single('profileImage'), async (req, res) => {
     try {
         const { token } = req.cookies;
@@ -366,3 +368,6 @@ app.listen(PORT, () => {
     console.log(`Backend URL: ${BACKEND_URL}`)
     console.log(`Frontend URL: ${FRONTEND_URL}`)
 })
+
+// Export app for testing
+module.exports = app;
