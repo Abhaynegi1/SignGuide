@@ -27,10 +27,10 @@ SignGuide is a full-stack web application designed to make sign language learnin
 ## 📸 Screenshots
 
 ### Landing Page
-![Landing Page](SignGuide/client/public/ScreenShots/LandingPage.png)
+![Landing Page](client/public/ScreenShots/LandingPage.png)
 
 ### Live Detection
-![Live Detection](SignGuide/client/public/ScreenShots/LiveDetect.png)
+![Live Detection](client/public/ScreenShots/LiveDetect.png)
 
 ### Quiz Interface
 ![Quiz](client/public/ScreenShots/quiz.png)
