@@ -10,7 +10,8 @@ const multer = require('multer')
 const path = require('path')
 const fs = require('fs')
 const dotenv = require("dotenv")
-const userRoutes = require('./routes/userRoutes')
+const userRoutes = require('./routes/userRoutes');
+const contentRoutes = require('./routes/contentRoutes');
 const User = require('./Models/user')
 const bcrypt = require('bcryptjs')
 const jwt = require("jsonwebtoken")
@@ -69,7 +70,7 @@ const upload = multer({
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: `${process.env.OAUTH_CALLBACK_URL || BACKEND_URL}/auth/google/callback`,
+    callbackURL: `${BACKEND_URL}/auth/google/callback`,
     passReqToCallback: true
 },
 async function(req, accessToken, refreshToken, profile, done) {
@@ -149,6 +150,7 @@ app.use(passport.session())
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/auth', userRoutes);
+app.use('/api/content', contentRoutes);
 
 app.get('/auth/google',
     passport.authenticate('google', { scope: ['profile', 'email'] })

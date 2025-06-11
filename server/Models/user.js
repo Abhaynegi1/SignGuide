@@ -10,9 +10,14 @@ const userSchema = new mongoose.Schema({
         video: { type: Number, default: 0 },  // Number of videos completed
         article: { type: Number, default: 0 },  // Number of articles read
         quiz: { type: Number, default: 0 },  // Number of quizzes completed
-        lastCompleted: { type: Date }  // Timestamp of last completion
+        lastCompleted: { type: Date, default: Date.now }  // Timestamp of last completion
     },
-    quizStats: { type: Array, default: [0, 0] }  // [total attempts, correct answers]
+    quizStats: { type: Array, default: [0, 0] },  // [total attempts, correct answers]
+    completedContent: [{
+        type: String,  // Type of content (video/article/quiz)
+        id: String,    // ID of the specific content
+        timestamp: { type: Date, default: Date.now }
+    }]
 }, { timestamps: true })
 
 module.exports = mongoose.model('User', userSchema)
