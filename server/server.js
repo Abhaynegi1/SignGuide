@@ -30,18 +30,6 @@ const isProduction = process.env.NODE_ENV === 'production' || process.env.RENDER
 const BACKEND_URL = process.env.BACKEND_URL || (isProduction ? 'https://signguide-backend-xhsq.onrender.com' : `http://localhost:${PORT}`);
 const FRONTEND_URL = process.env.FRONTEND_URL || (isProduction ? 'https://signguide.onrender.com' : 'http://localhost:5173');
 
-// Add proxy configuration for production
-if (isProduction) {
-    const { createProxyMiddleware } = require('http-proxy-middleware');
-    
-    app.use(createProxyMiddleware('/', {
-        target: FRONTEND_URL,
-        changeOrigin: true,
-        secure: true,
-        logLevel: 'debug'
-    }));
-}
-
 console.log('Environment Configuration:');
 console.log('Is Production:', isProduction);
 console.log('Backend URL:', BACKEND_URL);
@@ -130,9 +118,11 @@ passport.deserializeUser(async (id, done) => {
 // CORS configuration - More comprehensive
 app.use(cors({
     credentials: true,
-    origin: true,  // Use origin from request
+    origin: FRONTEND_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+    credentials: true,
+    exposedHeaders: ['Content-Length', 'X-Foo', 'X-Bar']
 }))
 
 app.use(express.json())
